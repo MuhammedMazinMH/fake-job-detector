@@ -5,6 +5,7 @@ ML-powered tool to detect fake job postings and protect job seekers from scams.
 ## Problem
 
 Every year, thousands of job seekers in India fall victim to fake job scams:
+
 - "Data Entry" work-from-home jobs with unrealistic pay
 - Upfront registration/training fees
 - Vague requirements and no company details
@@ -12,9 +13,20 @@ Every year, thousands of job seekers in India fall victim to fake job scams:
 ## Solution
 
 A machine learning model that analyzes job posting text and classifies it as:
+
 - ✅ **Real** — Legitimate job posting
 - ⚡ **Uncertain** — Some suspicious elements, verify before applying
 - ⚠️ **Fake** — Likely a scam
+
+## Live Demo
+
+🔗 **Try it now:** [Hugging Face Space](https://huggingface.co/spaces/MuhammedMazin/fake-job-detector)
+
+Paste any job posting to instantly check if it's real or fake.
+
+**Test Examples:**
+- **Fake:** "Earn $500 daily. No experience needed. Send $50 registration fee."
+- **Real:** "Bachelor's degree required. 3+ years Python experience. Microservices architecture."
 
 ## Model Performance
 
@@ -36,11 +48,16 @@ A machine learning model that analyzes job posting text and classifies it as:
 | Experiment Tracking | MLflow |
 | ML | XGBoost, Scikit-learn |
 | Text Processing | TF-IDF with bigrams |
-| UI | Streamlit |
+| Local UI | Streamlit |
+| Public Deploy | Gradio + Hugging Face Spaces |
 | Class Balancing | SMOTE |
 
 ## Quick Start
 
+### Option 1: Use Online (No Setup)
+Visit the live demo: [Hugging Face Space](https://huggingface.co/spaces/MuhammedMazin/fake-job-detector)
+
+### Option 2: Run Locally
 ```bash
 git clone https://github.com/MuhammedMazinMH/fake-job-detector.git
 cd fake-job-detector
@@ -48,7 +65,7 @@ python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 
-# Run the app
+# Run local Streamlit app
 cd src/app
 streamlit run app.py
 
@@ -69,18 +86,16 @@ fake-job-detector/
 │   └── 04_model_training_v2.ipynb     # XGBoost + SMOTE
 ├── src/
 │   ├── app/
-│   │   └── app.py                     # Streamlit UI
+│   │   ├── app.py                     # Streamlit UI (local)
+│   │   └── gradio_app.py              # Gradio UI (Hugging Face)
 │   ├── features/
 │   │   ├── tfidf_vectorizer_v2.pkl
 │   │   └── X_y_v2.pkl
 │   └── models/
 │       ├── best_model_v2.pkl          # XGBoost (F1=0.810)
+│       ├── rf_model_v2.pkl            # Random Forest (Hugging Face)
 │       └── vectorizer_v2.pkl
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 
-Demo
-Paste a job posting into the Streamlit app:
-Fake example: "Earn $500 daily. No experience needed. Send $50 registration fee."
-Real example: "Bachelor's degree required. 3+ years Python experience. Microservices architecture."
